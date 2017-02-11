@@ -1,7 +1,7 @@
 /*
  * Copyright 2017 Death-By-Code
  */
-package deathbycode.hackpoly2017;
+package main.java.hackpoly2017;
 
 public class Bootstrap {
     public static void main(String[] args) {

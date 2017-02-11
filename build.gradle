@@ -3,7 +3,19 @@ plugins {
     id 'idea'
 }
 
+defaultTasks 'assemble'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'deathbycode.hackpoly2017.Bootstrap'
+    }
+}
+
 repositories {
     mavenCentral()
     maven { url 'https://jitpack.io' }
+}
+
+dependencies {
+    compile 'com.github.year4000.utilities:core:master-SNAPSHOT'
 }

@@ -15,6 +15,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
@@ -34,10 +35,15 @@ public final class Bootstrap extends Application {
     private ToneSynth toneSynth = new ToneSynth();
     private File file;
     private PlayControl playControl;
+    private boolean hasFile;
+    private Alert alert = new Alert(Alert.AlertType.WARNING);
 
     @Override
     public void start(final Stage stage) {
     	stage.setTitle("Harmonibites");
+        alert.setContentText("You must select a file before you can use this button");
+        alert.setWidth(480);
+        alert.setHeaderText(null);
         final FileChooser fileChooser = new FileChooser();
         final Slider beatSpeed = new Slider();
         final Button openButton = new Button("Browse");
@@ -54,9 +60,14 @@ public final class Bootstrap extends Application {
             new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(final ActionEvent e) {
-                    stage.setWidth(1280);
+                    hasFile = false;
+                    fileHex.setValue("...");
+                    filestr.setValue("...");
+                    stage.setWidth(720);
                     file = fileChooser.showOpenDialog(stage);
                     if (file != null) {
+                        stage.setWidth(1280);
+                        hasFile = true;
                        SHA256Hash hash = new SHA256Hash(file.getPath());
                     	try {
 							fileHex.setValue(hash.hashFileHex());
@@ -74,8 +85,13 @@ public final class Bootstrap extends Application {
             new EventHandler<ActionEvent>() {
                 @Override
                 public void handle( final ActionEvent e ) {
-                    SHA256Hash hash = new SHA256Hash( file.getPath() );
+                    if (!hasFile) {
+                        alert.showAndWait();
+                        return;
+                    }
                    if (file != null) {
+                       SHA256Hash hash = new SHA256Hash( file.getPath() );
+                       hasFile = true;
                        SHA256Hash mash = new SHA256Hash(file.getPath());
                     	try {
 							fileHex.setValue(mash.hashFileHex());
@@ -102,7 +118,13 @@ public final class Bootstrap extends Application {
                 new EventHandler<ActionEvent>() {
                     @Override
                     public void handle( final ActionEvent e ) {
-                        playControl.stopMusic();
+                        if (!hasFile) {
+                            alert.showAndWait();
+                            return;
+                        }
+                        if (playControl != null) {
+                            playControl.stopMusic();
+                        }
                     }
                 });
 

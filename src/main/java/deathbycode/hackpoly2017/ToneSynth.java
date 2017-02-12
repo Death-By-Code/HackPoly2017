@@ -41,14 +41,15 @@ public class ToneSynth {
     @param length: The duration in milliseconds that the notes will play
      */
     public void playNotes(int len, byte... notes) {
+        byte[] minor = PlayControl.generateMinorScale(notes[0]);
         AtomicInteger i = new AtomicInteger(0);
         scheduler.repeat(task -> {
             int j = i.getAndIncrement();
             if (j >= notes.length) {
                 task.stop();
             } else {
-                this.midichannel[2].noteOn(notes[j] % 16 + 60, 100);
-                scheduler.run(() -> this.midichannel[2].noteOff(notes[j]), len, TimeUnit.MILLISECONDS);
+                this.midichannel[2].noteOn(minor[Math.abs(notes[j]) % 15], 100);
+                scheduler.run(() -> this.midichannel[2].noteOff(minor[Math.abs(notes[j]) % 15]), len, TimeUnit.MILLISECONDS);
             }
         }, len, TimeUnit.MILLISECONDS);
     }

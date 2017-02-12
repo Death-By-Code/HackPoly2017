@@ -1,5 +1,4 @@
 package deathbycode.hackpoly2017;
-
 /**
  * Created by Acer Customer on 2/11/2017.
  */
@@ -13,13 +12,11 @@ public class PlayControl {
     final private static int MILLISECOND_PER_SECOND = 1000;
 
     private ToneSynth player;
-
     private int bpm;
 
-
-    public PlayControl (int Bpm, ToneSynth Player) {
-        bpm = Bpm;
-        player = Player;
+    public PlayControl (int bpm, ToneSynth player) {
+        this.bpm = bpm;
+        this.player = player;
     }
 
     public int getBeatInMillisecond() {
@@ -29,8 +26,6 @@ public class PlayControl {
     public void playQuarterNote(byte... noteIndex) {
         player.playNotes(this.getBeatInMillisecond(), noteIndex);
     }
-
-
 
     /*
     Generates a 15 note scale starting with the startingMidiIndex with index 60 as middle C
@@ -63,23 +58,23 @@ public class PlayControl {
     @param startingMidiIndex: The starting note of the scale
     @return: A 15 note major scale
      */
-    public static int[] generateMinorScale(int startingMidiIndex) {
-        int scaleDegrees[] = new int[15];
+    public static byte[] generateMinorScale(byte startingMidiIndex) {
+        byte scaleDegrees[] = new byte[15];
         scaleDegrees[0] = startingMidiIndex;
-        scaleDegrees[1] = startingMidiIndex + 2;
-        scaleDegrees[2] = startingMidiIndex + 3;
-        scaleDegrees[3] = startingMidiIndex + 5;
-        scaleDegrees[4] = startingMidiIndex + 7;
-        scaleDegrees[5] = startingMidiIndex + 8;
-        scaleDegrees[6] = startingMidiIndex + 10;
-        scaleDegrees[7] = startingMidiIndex + 12; // octave
-        scaleDegrees[8] = startingMidiIndex + 14;
-        scaleDegrees[9] = startingMidiIndex + 15;
-        scaleDegrees[10] = startingMidiIndex + 17;
-        scaleDegrees[11] = startingMidiIndex + 19;
-        scaleDegrees[12] = startingMidiIndex + 20;
-        scaleDegrees[13] = startingMidiIndex + 22;
-        scaleDegrees[14] = startingMidiIndex + 24;
+        scaleDegrees[1] = (byte) (startingMidiIndex + 2);
+        scaleDegrees[2] = (byte) (startingMidiIndex + 3);
+        scaleDegrees[3] = (byte) (startingMidiIndex + 5);
+        scaleDegrees[4] = (byte) (startingMidiIndex + 7);
+        scaleDegrees[5] = (byte) (startingMidiIndex + 8);
+        scaleDegrees[6] = (byte) (startingMidiIndex + 10);
+        scaleDegrees[7] = (byte) (startingMidiIndex + 12); // octave
+        scaleDegrees[8] = (byte) (startingMidiIndex + 14);
+        scaleDegrees[9] = (byte) (startingMidiIndex + 15);
+        scaleDegrees[10] = (byte) (startingMidiIndex + 17);
+        scaleDegrees[11] = (byte) (startingMidiIndex + 19);
+        scaleDegrees[12] = (byte) (startingMidiIndex + 20);
+        scaleDegrees[13] = (byte) (startingMidiIndex + 22);
+        scaleDegrees[14] = (byte) (startingMidiIndex + 24);
 
         return scaleDegrees;
     }

@@ -9,6 +9,7 @@ import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Synthesizer;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Created by Acer Customer on 2/11/2017.
@@ -41,10 +42,16 @@ public class ToneSynth {
     @param length: The duration in milliseconds that the notes will play
      */
     public void playNotes(int len, byte... notes) {
-        for (byte note : notes) {
-            this.midichannel[2].noteOn(note, len);
-        }
-        scheduler.run(() -> this.midichannel[2].allNotesOff(), len, TimeUnit.MILLISECONDS);
+        AtomicInteger i = new AtomicInteger(0);
+        scheduler.repeat(task -> {
+            int j = i.getAndIncrement();
+            if (j >= notes.length) {
+                task.stop();
+            } else {
+                this.midichannel[2].noteOn(notes[j] % 16 + 60, 100);
+                scheduler.run(() -> this.midichannel[2].noteOff(notes[j]), len, TimeUnit.MILLISECONDS);
+            }
+        }, len, TimeUnit.MILLISECONDS);
     }
 
     public void play(String str) {

@@ -24,10 +24,17 @@ public class PlayControl {
         return MILLISECOND_PER_MINUTE / bpm;
     }
 
-    public void playQuarterNote(int noteIndex) {
+    public void playQuarterNote(int... noteIndex) {
         player.playNotes(this.getBeatInMillisecond(), noteIndex);
     }
 
+
+
+    /*
+    Generates a 15 note scale starting with the startingMidiIndex with index 60 as middle C
+    @param startingMidiIndex: The starting note of the scale
+    @return: A 15 note major scale
+     */
     public static int[] generateMajorScale(int startingMidiIndex) {
         int scaleDegrees[] = new int[15];
         scaleDegrees[0] = startingMidiIndex;
@@ -49,4 +56,29 @@ public class PlayControl {
         return scaleDegrees;
     }
 
+    /*
+    Generates a 15 note minor scale starting with the startingMidiIndex with index 60 as middle C
+    @param startingMidiIndex: The starting note of the scale
+    @return: A 15 note major scale
+     */
+    public static int[] generateMinorScale(int startingMidiIndex) {
+        int scaleDegrees[] = new int[15];
+        scaleDegrees[0] = startingMidiIndex;
+        scaleDegrees[1] = startingMidiIndex + 2;
+        scaleDegrees[2] = startingMidiIndex + 3;
+        scaleDegrees[3] = startingMidiIndex + 5;
+        scaleDegrees[4] = startingMidiIndex + 7;
+        scaleDegrees[5] = startingMidiIndex + 8;
+        scaleDegrees[6] = startingMidiIndex + 10;
+        scaleDegrees[7] = startingMidiIndex + 12; // octave
+        scaleDegrees[8] = startingMidiIndex + 14;
+        scaleDegrees[9] = startingMidiIndex + 15;
+        scaleDegrees[10] = startingMidiIndex + 17;
+        scaleDegrees[11] = startingMidiIndex + 19;
+        scaleDegrees[12] = startingMidiIndex + 20;
+        scaleDegrees[13] = startingMidiIndex + 22;
+        scaleDegrees[14] = startingMidiIndex + 24;
+
+        return scaleDegrees;
+    }
 }

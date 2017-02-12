@@ -64,18 +64,11 @@ public class ToneSynth {
             if (j >= notes.length) {
                 task.stop();
             } else {
-                if(beatCount % 16 == 0) {
-                    this.midichannel[2].noteOn(scale[3], 1000);
+                // Harmonize notes every 4 beats
+                if(beatCount % 4 == 0){
+                    this.midichannel[2].noteOn(scale[notes[j] % 13], 100);
                 }
-                else if(beatCount % 12 == 0) {
-                    this.midichannel[2].noteOn(scale[4], 1000);
-                }
-                else if(beatCount % 8 == 0) {
-                    this.midichannel[2].noteOn(scale[3], 1000);
-                }
-                else if(beatCount % 4 == 0) {
-                    this.midichannel[2].noteOn(scale[0], 1000);
-                }
+
                 this.midichannel[2].noteOn(scale[notes[j] % 15], 100);
                 scheduler.run(() -> this.midichannel[2].noteOff(scale[Math.abs(notes[j]) % 15]), len, TimeUnit.MILLISECONDS);
             }

@@ -14,7 +14,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Created by Acer Customer on 2/11/2017.
  */
 public class ToneSynth {
-    private final Scheduler scheduler = SchedulerManager.builder().build();
+    private Scheduler scheduler;
     private Synthesizer syn;
     private MidiChannel[] midichannel;
 
@@ -50,6 +50,9 @@ public class ToneSynth {
 //            System.out.println(minor[i]);
 //        }
         AtomicInteger i = new AtomicInteger(0);
+        if( scheduler != null )
+            stopNotes();
+        scheduler = SchedulerManager.builder().build();
         scheduler.repeat(task -> {
             int j = i.getAndIncrement();
             if (j >= notes.length) {
@@ -60,5 +63,9 @@ public class ToneSynth {
                 scheduler.run(() -> this.midichannel[2].noteOff(scale[Math.abs(notes[j]) % 15]), len, TimeUnit.MILLISECONDS);
             }
         }, len, TimeUnit.MILLISECONDS);
+    }
+    
+    public void stopNotes() {
+        scheduler.endAll();
     }
 }

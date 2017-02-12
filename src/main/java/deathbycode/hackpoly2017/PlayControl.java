@@ -29,6 +29,10 @@ public class PlayControl {
         }
         player.playNotes(this.getBeatInMillisecond(), noteIndex);
     }
+    
+    public void stopMusic() {
+        player.stopNotes();
+    }
 
     /*
     Generates a 15 note scale starting with the startingMidiIndex with index 60 as middle C

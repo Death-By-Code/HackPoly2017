@@ -31,7 +31,8 @@ public final class Bootstrap extends Application {
 
     private Desktop desktop = Desktop.getDesktop();
     private ToneSynth toneSynth = new ToneSynth();
-    public File file;
+    private File file;
+    private PlayControl playControl;
 
     @Override
     public void start(final Stage stage) {
@@ -40,6 +41,7 @@ public final class Bootstrap extends Application {
         final Slider beatSpeed = new Slider();
         final Button openButton = new Button("Browse");
         final Button playButton = new Button("Play");
+        final Button stopButton = new Button("Stop");
 
 
         Label hashText = new Label("...");
@@ -88,7 +90,7 @@ public final class Bootstrap extends Application {
                             for(int i = 0; i < hashAsciiValues.length; i++){
                                 System.out.println(hashAsciiValues[i]);
                             }
-                            PlayControl playControl = new PlayControl((int)beatSpeed.getValue(), toneSynth);
+                            playControl = new PlayControl((int)beatSpeed.getValue(), toneSynth);
                             playControl.playQuarterNote(hashAsciiValues);
 
 //							toneSynth.playNotes(300 - (int)beatSpeed.getValue(), String.getBytes(hash.hashFileHex()));
@@ -100,6 +102,14 @@ public final class Bootstrap extends Application {
                     }
                 }
             });
+            
+            stopButton.setOnAction(
+                new EventHandler<ActionEvent>() {
+                    @Override
+                    public void handle( final ActionEvent e ) {
+                        playControl.stopMusic();
+                    }
+                });
 
         final GridPane inputGridPane = new GridPane();
 
@@ -133,10 +143,21 @@ public final class Bootstrap extends Application {
 
         // hash output
         Label hashout = new Label("Hash: ");
+<<<<<<< HEAD
         inputGridPane.add(hashout, 0, 4);
         inputGridPane.add(hashText, 1, 4);
 
         inputGridPane.add( playButton, 1, 5 );
+=======
+        inputGridPane.add(hashout, 0, 3);
+        inputGridPane.add(hashText, 1, 3);
+        
+        // play button
+        inputGridPane.add( playButton, 1, 4 );
+        
+        // stop button
+        inputGridPane.add( stopButton, 1, 5 );
+>>>>>>> origin/master
 
         GridPane.setConstraints(openButton, 1, 1);
         inputGridPane.setAlignment(Pos.CENTER);

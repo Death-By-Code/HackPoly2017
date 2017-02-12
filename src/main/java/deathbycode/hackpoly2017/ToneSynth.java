@@ -40,11 +40,17 @@ public class ToneSynth {
     @param notes: Piano keys in the range 0 - 127 with 60 as middle C
     @param length: The duration in milliseconds that the notes will play
      */
-    public void playNotes(int len, byte... notes) {
+    public void playNotes(int len, byte... notes) throws InterruptedException {
         for (byte note : notes) {
-            this.midichannel[2].noteOn(note, len);
+            this.midichannel[2].noteOn(note, 100);
+            TimeUnit.MILLISECONDS.sleep(250);
+            /*scheduler.run(() -> {
+            	this.midichannel[2].allNotesOff();
+
+            }, len, TimeUnit.MILLISECONDS);
+//            this.midichannel[2].noteOff(note);*/
+
         }
-        scheduler.run(() -> this.midichannel[2].allNotesOff(), len, TimeUnit.MILLISECONDS);
     }
 
     /*public void play(String str) {

@@ -44,10 +44,10 @@ public final class Bootstrap extends Application {
         final Button stopButton = new Button("Stop");
 
 
-        Label hashText = new Label("waiting...");
-        String str = new String();
+        Label hashText = new Label("...");
+        Label fileName = new Label("...");
         StringProperty fileHex = new SimpleStringProperty();
-        fileHex.setValue(str);
+        StringProperty filestr = new SimpleStringProperty();
 
         openButton.setOnAction(
             new EventHandler<ActionEvent>() {
@@ -58,12 +58,14 @@ public final class Bootstrap extends Application {
                        SHA256Hash hash = new SHA256Hash(file.getPath());
                     	try {
 							fileHex.setValue(hash.hashFileHex());
+							filestr.setValue(file.getName());
 							//toneSynth.playNotes(300 - (int)beatSpeed.getValue(), hash.hashFile());
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
                     	hashText.textProperty().bind(fileHex);
+                    	fileName.textProperty().bind(filestr);
                     }
                 }
             });
@@ -97,7 +99,7 @@ public final class Bootstrap extends Application {
                     }
                 }
             });
-            
+
             stopButton.setOnAction(
                 new EventHandler<ActionEvent>() {
                     @Override
@@ -116,9 +118,14 @@ public final class Bootstrap extends Application {
         Label fileButton = new Label("Select file: ");
         inputGridPane.add(fileButton, 0, 1);
 
+        // file name
+        Label fileTitle = new Label("File name: ");
+        inputGridPane.add(fileTitle, 0, 2);
+        inputGridPane.add(fileName, 1, 2);
+
         // BPM slider
         Label bpm = new Label("BPM: ");
-        inputGridPane.add(bpm, 0, 2);
+        inputGridPane.add(bpm, 0, 3);
         beatSpeed.setMin(50);
         beatSpeed.setMax(250);
         beatSpeed.setValue(150);
@@ -127,19 +134,19 @@ public final class Bootstrap extends Application {
         beatSpeed.setMajorTickUnit(50);
         beatSpeed.setMinorTickCount(5);
         beatSpeed.setBlockIncrement(10);
-        inputGridPane.setConstraints(beatSpeed, 1, 2);
+        inputGridPane.setConstraints(beatSpeed, 1, 3);
         inputGridPane.getChildren().add(beatSpeed);
 
         // hash output
         Label hashout = new Label("Hash: ");
-        inputGridPane.add(hashout, 0, 3);
-        inputGridPane.add(hashText, 1, 3);
-        
+        inputGridPane.add(hashout, 0, 4);
+        inputGridPane.add(hashText, 1, 4);
+
         // play button
-        inputGridPane.add( playButton, 1, 4 );
-        
+        inputGridPane.add( playButton, 1, 5 );
+
         // stop button
-        inputGridPane.add( stopButton, 1, 5 );
+        inputGridPane.add( stopButton, 1, 6 );
 
         GridPane.setConstraints(openButton, 1, 1);
         inputGridPane.setAlignment(Pos.CENTER);

@@ -28,6 +28,7 @@ import javafx.stage.Stage;
 public final class Bootstrap extends Application {
 
     private Desktop desktop = Desktop.getDesktop();
+    private ToneSynth toneSynth = new ToneSynth();
 
     @Override
     public void start(final Stage stage) {

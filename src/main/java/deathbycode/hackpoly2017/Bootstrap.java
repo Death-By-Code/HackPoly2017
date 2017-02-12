@@ -126,9 +126,9 @@ public final class Bootstrap extends Application {
         // BPM slider
         Label bpm = new Label("BPM: ");
         inputGridPane.add(bpm, 0, 3);
-        beatSpeed.setMin(50);
+        beatSpeed.setMin(150);
         beatSpeed.setMax(250);
-        beatSpeed.setValue(150);
+        beatSpeed.setValue(200);
         beatSpeed.setShowTickLabels(true);
         beatSpeed.setShowTickMarks(true);
         beatSpeed.setMajorTickUnit(50);
@@ -149,14 +149,14 @@ public final class Bootstrap extends Application {
         inputGridPane.add( stopButton, 1, 6 );
 
         GridPane.setConstraints(openButton, 1, 1);
-        inputGridPane.setAlignment(Pos.CENTER);
+        inputGridPane.setAlignment(Pos.CENTER_LEFT);
         inputGridPane.setHgap(100);
         inputGridPane.setVgap(20);
         inputGridPane.getChildren().addAll(openButton);
 
         final Pane rootGroup = new VBox(12);
         rootGroup.getChildren().addAll(inputGridPane);
-        rootGroup.setPadding(new Insets(25, 25, 25, 25));
+        rootGroup.setPadding(new Insets(20, 20, 20, 20));
 
         stage.setScene(new Scene(rootGroup));
         stage.show();

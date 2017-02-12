@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -113,6 +114,7 @@ public final class Bootstrap extends Application {
                 });
 
         final GridPane inputGridPane = new GridPane();
+        inputGridPane.setPrefSize(500, 300);
 
         Text scenetitle = new Text("Choose a file to play sound for");
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
@@ -153,7 +155,7 @@ public final class Bootstrap extends Application {
 
         GridPane.setConstraints(openButton, 1, 1);
         inputGridPane.setAlignment(Pos.CENTER_LEFT);
-        inputGridPane.setHgap(100);
+        inputGridPane.setHgap(5);
         inputGridPane.setVgap(20);
         inputGridPane.getChildren().addAll(openButton);
 

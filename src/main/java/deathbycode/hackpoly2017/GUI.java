@@ -5,7 +5,11 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import application.SHA256Hash;
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -33,13 +37,25 @@ public final class GUI extends Application {
 
         final Button openButton = new Button("Browse");
 
+        Label hashText = new Label("waiting...");
+        String str = new String();
+        StringProperty fileHex = new SimpleStringProperty();
+        fileHex.setValue(str);
+
         openButton.setOnAction(
             new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(final ActionEvent e) {
                     File file = fileChooser.showOpenDialog(stage);
                     if (file != null) {
-                        SHA256Hash hash = new SHA256Hash(file.getPath());
+                       SHA256Hash hash = new SHA256Hash(file.getPath());
+                    	try {
+							fileHex.setValue(hash.hashFileHex());
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+                    	hashText.textProperty().bind(fileHex);
                     }
                 }
             });
@@ -53,6 +69,10 @@ public final class GUI extends Application {
 
         Label fileButton = new Label("Select file: ");
         inputGridPane.add(fileButton, 0, 1);
+
+        Label hashout = new Label("Hash: ");
+        inputGridPane.add(hashout, 0, 2);
+        inputGridPane.add(hashText, 1, 2);
 
         GridPane.setConstraints(openButton, 1, 1);
         inputGridPane.setAlignment(Pos.CENTER);

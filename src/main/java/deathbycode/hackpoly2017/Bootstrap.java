@@ -17,6 +17,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -36,10 +37,10 @@ public final class Bootstrap extends Application {
     public void start(final Stage stage) {
     	stage.setTitle("Harmonibites");
         final FileChooser fileChooser = new FileChooser();
-        final ComboBox<Integer> beatSpeed = new ComboBox<>();
+        final Slider beatSpeed = new Slider();
         final Button openButton = new Button("Browse");
         final Button playButton = new Button("Play");
-        
+
 
         Label hashText = new Label("waiting...");
         String str = new String();
@@ -101,25 +102,29 @@ public final class Bootstrap extends Application {
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         inputGridPane.add(scenetitle, 0, 0, 2, 1);
 
+        // file selection
         Label fileButton = new Label("Select file: ");
         inputGridPane.add(fileButton, 0, 1);
 
+        // BPM slider
+        Label bpm = new Label("BPM: ");
+        inputGridPane.add(bpm, 0, 2);
+        beatSpeed.setMin(50);
+        beatSpeed.setMax(250);
+        beatSpeed.setValue(150);
+        beatSpeed.setShowTickLabels(true);
+        beatSpeed.setShowTickMarks(true);
+        beatSpeed.setMajorTickUnit(50);
+        beatSpeed.setMinorTickCount(5);
+        beatSpeed.setBlockIncrement(10);
+        inputGridPane.setConstraints(beatSpeed, 1, 2);
+        inputGridPane.getChildren().add(beatSpeed);
+
+        // hash output
         Label hashout = new Label("Hash: ");
         inputGridPane.add(hashout, 0, 3);
         inputGridPane.add(hashText, 1, 3);
 
-        // select BPM
-        Label bpm = new Label("BPM: ");
-        inputGridPane.add(bpm, 0, 2);
-        beatSpeed.getItems().addAll(
-        		50,
-        		100,
-        		150,
-        		200,
-        		250
-        );
-        inputGridPane.add(beatSpeed, 1, 2);
-        
         inputGridPane.add( playButton, 1, 4 );
 
         GridPane.setConstraints(openButton, 1, 1);

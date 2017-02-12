@@ -31,7 +31,7 @@ public final class Bootstrap extends Application {
 
     private Desktop desktop = Desktop.getDesktop();
     private ToneSynth toneSynth = new ToneSynth();
-    private File file;
+    public File file;
     private PlayControl playControl;
 
     @Override
@@ -90,8 +90,9 @@ public final class Bootstrap extends Application {
                             for(int i = 0; i < hashAsciiValues.length; i++){
                                 System.out.println(hashAsciiValues[i]);
                             }
+                            PlayControl playControl = new PlayControl((int)
+                            		beatSpeed.getValue(), toneSynth);
                             playControl = new PlayControl((int)beatSpeed.getValue(), toneSynth);
-                            playControl.playQuarterNote(hashAsciiValues);
 
 //							toneSynth.playNotes(300 - (int)beatSpeed.getValue(), String.getBytes(hash.hashFileHex()));
 						} catch (Exception e1) {
@@ -102,7 +103,7 @@ public final class Bootstrap extends Application {
                     }
                 }
             });
-            
+
             stopButton.setOnAction(
                 new EventHandler<ActionEvent>() {
                     @Override
@@ -123,9 +124,8 @@ public final class Bootstrap extends Application {
 
         // File name
         Label name = new Label("File name: ");
-        fileTitle.setName(fileName);
         inputGridPane.add(name, 0, 2);
-        inputGridPane.add(filestr, 1, 2);
+        inputGridPane.add(fileName, 1, 2);
 
         // BPM slider
         Label bpm = new Label("BPM: ");
@@ -143,21 +143,18 @@ public final class Bootstrap extends Application {
 
         // hash output
         Label hashout = new Label("Hash: ");
-<<<<<<< HEAD
         inputGridPane.add(hashout, 0, 4);
         inputGridPane.add(hashText, 1, 4);
 
         inputGridPane.add( playButton, 1, 5 );
-=======
         inputGridPane.add(hashout, 0, 3);
         inputGridPane.add(hashText, 1, 3);
-        
+
         // play button
         inputGridPane.add( playButton, 1, 4 );
-        
+
         // stop button
         inputGridPane.add( stopButton, 1, 5 );
->>>>>>> origin/master
 
         GridPane.setConstraints(openButton, 1, 1);
         inputGridPane.setAlignment(Pos.CENTER);

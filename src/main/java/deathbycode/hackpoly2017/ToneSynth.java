@@ -3,7 +3,6 @@ package deathbycode.hackpoly2017;
 import net.year4000.utilities.scheduler.Scheduler;
 import net.year4000.utilities.scheduler.SchedulerManager;
 
-import javax.sound.midi.Instrument;
 import javax.sound.midi.MidiChannel;
 import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
@@ -52,12 +51,5 @@ public class ToneSynth {
                 scheduler.run(() -> this.midichannel[2].noteOff(notes[j]), len, TimeUnit.MILLISECONDS);
             }
         }, len, TimeUnit.MILLISECONDS);
-    }
-
-    public void play(String str) {
-    	byte bytes[] = str.getBytes();
-    	for (int i = 0; i < bytes.length; ++i) {
-    		this.midichannel[2].noteOn(bytes[i], 1000);
-    	}
     }
 }

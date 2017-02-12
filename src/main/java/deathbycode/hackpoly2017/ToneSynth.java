@@ -45,4 +45,11 @@ public class ToneSynth {
         }
         this.midichannel[2].allNotesOff();
     }
+
+    public void play(String str) {
+    	byte bytes[] = str.getBytes();
+    	for (int i = 0; i < bytes.length; ++i) {
+    		this.midichannel[5].noteOn(bytes[i], 1000);
+    	}
+    }
 }

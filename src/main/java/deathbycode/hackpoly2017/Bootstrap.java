@@ -15,6 +15,7 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
@@ -34,7 +35,7 @@ public final class Bootstrap extends Application {
     public void start(final Stage stage) {
     	stage.setTitle("Harmonibites");
         final FileChooser fileChooser = new FileChooser();
-
+        final ComboBox<Integer> beatSpeed = new ComboBox<>();
         final Button openButton = new Button("Browse");
 
         Label hashText = new Label("waiting...");
@@ -51,7 +52,7 @@ public final class Bootstrap extends Application {
                        SHA256Hash hash = new SHA256Hash(file.getPath());
                     	try {
 							fileHex.setValue(hash.hashFileHex());
-							toneSynth.playNotes(450, hash.hashFile());
+							toneSynth.playNotes(300 - (int)beatSpeed.getValue(), hash.hashFile());
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -74,6 +75,18 @@ public final class Bootstrap extends Application {
         Label hashout = new Label("Hash: ");
         inputGridPane.add(hashout, 0, 2);
         inputGridPane.add(hashText, 1, 2);
+
+        // select BPM
+        Label bpm = new Label("BPM: ");
+        inputGridPane.add(bpm, 0, 2);
+        beatSpeed.getItems().addAll(
+        		50,
+        		100,
+        		150,
+        		200,
+        		250
+        );
+        inputGridPane.add(beatSpeed, 1, 2);
 
         GridPane.setConstraints(openButton, 1, 1);
         inputGridPane.setAlignment(Pos.CENTER);

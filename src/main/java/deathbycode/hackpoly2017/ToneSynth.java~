@@ -50,8 +50,6 @@ public class ToneSynth {
 //            System.out.println(minor[i]);
 //        }
         AtomicInteger i = new AtomicInteger(0);
-        if( scheduler != null )
-            stopNotes();
         scheduler = SchedulerManager.builder().build();
         scheduler.repeat(task -> {
             int j = i.getAndIncrement();

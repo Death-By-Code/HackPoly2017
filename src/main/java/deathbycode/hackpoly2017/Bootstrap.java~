@@ -139,7 +139,7 @@ public final class Bootstrap extends Application {
         inputGridPane.add( playButton, 1, 4 );
         
         // stop button
-        inputGridPane.add( stopButton, 1, 5 );
+        inputGridPane.add( stopButton, 2, 5 );
 
         GridPane.setConstraints(openButton, 1, 1);
         inputGridPane.setAlignment(Pos.CENTER);

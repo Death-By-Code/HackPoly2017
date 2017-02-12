@@ -47,10 +47,10 @@ public class ToneSynth {
         scheduler.run(() -> this.midichannel[2].allNotesOff(), len, TimeUnit.MILLISECONDS);
     }
 
-    public void play(String str) {
+    /*public void play(String str) {
     	byte bytes[] = str.getBytes();
     	for (int i = 0; i < bytes.length; ++i) {
     		this.midichannel[2].noteOn(bytes[i], 1000);
     	}
-    }
+    }*/
 }

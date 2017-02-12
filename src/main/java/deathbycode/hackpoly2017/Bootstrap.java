@@ -52,7 +52,7 @@ public final class Bootstrap extends Application {
                        SHA256Hash hash = new SHA256Hash(file.getPath());
                     	try {
 							fileHex.setValue(hash.hashFileHex());
-							toneSynth.playNotes(450, hash.hashFile());
+							toneSynth.playNotes(300 - (int)beatSpeed.getValue(), hash.hashFile());
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

@@ -145,7 +145,7 @@ public final class Bootstrap extends Application {
         inputGridPane.add(fileName, 1, 2);
 
         // hash output
-        Label hashout = new Label("Hash: ");
+        Label hashout = new Label("SHA256 Hash: ");
         inputGridPane.add(hashout, 0, 3);
         inputGridPane.add(hashText, 1, 3);
 

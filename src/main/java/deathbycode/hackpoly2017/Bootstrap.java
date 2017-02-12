@@ -42,10 +42,13 @@ public final class Bootstrap extends Application {
         final Button playButton = new Button("Play");
 
 
-        Label hashText = new Label("waiting...");
+        Label hashText = new Label("...");
+        Label fileName = new Label("...");
         String str = new String();
         StringProperty fileHex = new SimpleStringProperty();
+        StringProperty filestr = new SimpleStringProperty();
         fileHex.setValue(str);
+        filestr.setValue(str);
 
         openButton.setOnAction(
             new EventHandler<ActionEvent>() {
@@ -56,11 +59,13 @@ public final class Bootstrap extends Application {
                        SHA256Hash hash = new SHA256Hash(file.getPath());
                     	try {
 							fileHex.setValue(hash.hashFileHex());
+							filestr.setValue(file.getName());
 							//toneSynth.playNotes(300 - (int)beatSpeed.getValue(), hash.hashFile());
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
+						fileName.textProperty().bind(filestr);
                     	hashText.textProperty().bind(fileHex);
                     }
                 }
@@ -106,26 +111,32 @@ public final class Bootstrap extends Application {
         Label fileButton = new Label("Select file: ");
         inputGridPane.add(fileButton, 0, 1);
 
+        // File name
+        Label name = new Label("File name: ");
+        fileTitle.setName(fileName);
+        inputGridPane.add(name, 0, 2);
+        inputGridPane.add(filestr, 1, 2);
+
         // BPM slider
         Label bpm = new Label("BPM: ");
-        inputGridPane.add(bpm, 0, 2);
-        beatSpeed.setMin(50);
+        inputGridPane.add(bpm, 0, 3);
+        beatSpeed.setMin(150);
         beatSpeed.setMax(250);
-        beatSpeed.setValue(150);
+        beatSpeed.setValue(200);
         beatSpeed.setShowTickLabels(true);
         beatSpeed.setShowTickMarks(true);
         beatSpeed.setMajorTickUnit(50);
         beatSpeed.setMinorTickCount(5);
         beatSpeed.setBlockIncrement(10);
-        inputGridPane.setConstraints(beatSpeed, 1, 2);
+        inputGridPane.setConstraints(beatSpeed, 1, 3);
         inputGridPane.getChildren().add(beatSpeed);
 
         // hash output
         Label hashout = new Label("Hash: ");
-        inputGridPane.add(hashout, 0, 3);
-        inputGridPane.add(hashText, 1, 3);
+        inputGridPane.add(hashout, 0, 4);
+        inputGridPane.add(hashText, 1, 4);
 
-        inputGridPane.add( playButton, 1, 4 );
+        inputGridPane.add( playButton, 1, 5 );
 
         GridPane.setConstraints(openButton, 1, 1);
         inputGridPane.setAlignment(Pos.CENTER);

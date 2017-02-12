@@ -1,3 +1,5 @@
+package deathbycode.hackpoly2017;
+
 /**
  * Created by Acer Customer on 2/11/2017.
  */
@@ -24,7 +26,7 @@ public class PlayControl {
         return MILLISECOND_PER_MINUTE / bpm;
     }
 
-    public void playQuarterNote(int... noteIndex) {
+    public void playQuarterNote(byte... noteIndex) {
         player.playNotes(this.getBeatInMillisecond(), noteIndex);
     }
 

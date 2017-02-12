@@ -69,12 +69,9 @@ public final class Bootstrap extends Application {
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         inputGridPane.add(scenetitle, 0, 0, 2, 1);
 
+        // file select
         Label fileButton = new Label("Select file: ");
         inputGridPane.add(fileButton, 0, 1);
-
-        Label hashout = new Label("Hash: ");
-        inputGridPane.add(hashout, 0, 2);
-        inputGridPane.add(hashText, 1, 2);
 
         // select BPM
         Label bpm = new Label("BPM: ");
@@ -87,6 +84,11 @@ public final class Bootstrap extends Application {
         		250
         );
         inputGridPane.add(beatSpeed, 1, 2);
+
+        // hash string
+        Label hashout = new Label("Hash: ");
+        inputGridPane.add(hashout, 0, 3);
+        inputGridPane.add(hashText, 1, 3);
 
         GridPane.setConstraints(openButton, 1, 1);
         inputGridPane.setAlignment(Pos.CENTER);

@@ -54,6 +54,7 @@ public final class Bootstrap extends Application {
             new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(final ActionEvent e) {
+                    stage.setWidth(1280);
                     file = fileChooser.showOpenDialog(stage);
                     if (file != null) {
                        SHA256Hash hash = new SHA256Hash(file.getPath());
@@ -167,7 +168,7 @@ public final class Bootstrap extends Application {
 
         Scene scene = new Scene(rootGroup);
         stage.setScene(scene);
-        stage.setHeight(480);
+        stage.setHeight(500);
         stage.setWidth(720);
         stage.setResizable(false);
         stage.show();

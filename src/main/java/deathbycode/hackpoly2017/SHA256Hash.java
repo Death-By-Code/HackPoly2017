@@ -3,6 +3,7 @@ package deathbycode.hackpoly2017;
 import java.io.*;
 import java.security.MessageDigest;
 import javax.xml.bind.DatatypeConverter;
+import java.util.Arrays;
 
 public class SHA256Hash
 {
@@ -64,6 +65,7 @@ public class SHA256Hash
     public String hashFileHex() throws Exception
     {
         String hashInHex = DatatypeConverter.printHexBinary( hashFile() );
+//        System.out.println( Arrays.toString(hashInHex.getBytes()));
         return hashInHex;
     }
     

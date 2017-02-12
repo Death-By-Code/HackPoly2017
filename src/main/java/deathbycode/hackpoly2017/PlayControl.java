@@ -24,9 +24,6 @@ public class PlayControl {
     }
 
     public void playQuarterNote(int... noteIndex) {
-        for(int i = 0; i < noteIndex.length; i++){
-            System.out.println(noteIndex[i]);
-        }
         player.playNotes(this.getBeatInMillisecond(), noteIndex);
     }
     

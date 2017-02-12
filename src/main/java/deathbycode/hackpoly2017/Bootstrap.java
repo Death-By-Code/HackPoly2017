@@ -24,6 +24,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -59,9 +60,7 @@ public final class Bootstrap extends Application {
                     	try {
 							fileHex.setValue(hash.hashFileHex());
 							filestr.setValue(file.getName());
-							//toneSynth.playNotes(300 - (int)beatSpeed.getValue(), hash.hashFile());
 						} catch (Exception e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
                     	hashText.textProperty().bind(fileHex);
@@ -90,9 +89,7 @@ public final class Bootstrap extends Application {
                             playControl = new PlayControl((int)beatSpeed.getValue(), toneSynth);
                             playControl.playQuarterNote(hashAsciiValues);
 
-//							toneSynth.playNotes(300 - (int)beatSpeed.getValue(), String.getBytes(hash.hashFileHex()));
 						} catch (Exception e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
                     	//hashText.textProperty().bind(fileHex);

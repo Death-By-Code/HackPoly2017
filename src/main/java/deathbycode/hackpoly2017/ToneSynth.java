@@ -39,6 +39,8 @@ public class ToneSynth {
     @param length: The duration in milliseconds that the notes will play
      */
     public void playNotes(int len, int... notes) {
+
+
         int[] scale;
         if(notes[notes.length - 1] % 2 == 0) {
             scale = PlayControl.generateMinorScale(notes[0]);
@@ -46,20 +48,28 @@ public class ToneSynth {
         else {
             scale = PlayControl.generateMajorScale(notes[0]);
         }
+
+
 //        for(int i = 0; i< minor.length; i++) {
 //            System.out.println(minor[i]);
 //        }
+        AtomicInteger beatCounter = new AtomicInteger(0);
         AtomicInteger i = new AtomicInteger(0);
         if( scheduler != null )
             stopNotes();
         scheduler = SchedulerManager.builder().build();
         scheduler.repeat(task -> {
+            int beatCount = beatCounter.getAndIncrement();
             int j = i.getAndIncrement();
             if (j >= notes.length) {
                 task.stop();
             } else {
+                // Harmonize notes every 4 beats
+                if(beatCount % 4 == 0){
+                    this.midichannel[2].noteOn(scale[notes[j] % 13], 100);
+                }
+
                 this.midichannel[2].noteOn(scale[notes[j] % 15], 100);
-                System.out.println(notes[j] % 15);
                 scheduler.run(() -> this.midichannel[2].noteOff(scale[Math.abs(notes[j]) % 15]), len, TimeUnit.MILLISECONDS);
             }
         }, len, TimeUnit.MILLISECONDS);

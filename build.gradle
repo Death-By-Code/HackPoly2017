@@ -13,7 +13,7 @@ jar {
     baseName = rootProject.name
 
     manifest {
-        attributes 'Main-Class': 'main.java.hackpoly2017.Bootstrap'
+        attributes 'Main-Class': 'deathbycode.hackpoly2017.Bootstrap'
     }
 }
 

@@ -30,6 +30,7 @@ public final class Bootstrap extends Application {
 
     private Desktop desktop = Desktop.getDesktop();
     private ToneSynth toneSynth = new ToneSynth();
+    public File file;
 
     @Override
     public void start(final Stage stage) {
@@ -37,6 +38,8 @@ public final class Bootstrap extends Application {
         final FileChooser fileChooser = new FileChooser();
         final ComboBox<Integer> beatSpeed = new ComboBox<>();
         final Button openButton = new Button("Browse");
+        final Button playButton = new Button("Play");
+        
 
         Label hashText = new Label("waiting...");
         String str = new String();
@@ -47,12 +50,12 @@ public final class Bootstrap extends Application {
             new EventHandler<ActionEvent>() {
                 @Override
                 public void handle(final ActionEvent e) {
-                    File file = fileChooser.showOpenDialog(stage);
+                    file = fileChooser.showOpenDialog(stage);
                     if (file != null) {
                        SHA256Hash hash = new SHA256Hash(file.getPath());
                     	try {
 							fileHex.setValue(hash.hashFileHex());
-							toneSynth.playNotes(300 - (int)beatSpeed.getValue(), hash.hashFile());
+							//toneSynth.playNotes(300 - (int)beatSpeed.getValue(), hash.hashFile());
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -62,6 +65,24 @@ public final class Bootstrap extends Application {
                 }
             });
 
+        playButton.setOnAction(
+            new EventHandler<ActionEvent>() {
+                @Override
+                public void handle( final ActionEvent e ) {
+                    SHA256Hash hash = new SHA256Hash( file.getPath() );
+                   if (file != null) {
+                       SHA256Hash mash = new SHA256Hash(file.getPath());
+                    	try {
+							fileHex.setValue(mash.hashFileHex());
+							toneSynth.playNotes(300 - (int)beatSpeed.getValue(), hash.hashFile());
+						} catch (Exception e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+                    	//hashText.textProperty().bind(fileHex);
+                    }
+                }
+            });
 
         final GridPane inputGridPane = new GridPane();
 
@@ -69,9 +90,12 @@ public final class Bootstrap extends Application {
         scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
         inputGridPane.add(scenetitle, 0, 0, 2, 1);
 
-        // file select
         Label fileButton = new Label("Select file: ");
         inputGridPane.add(fileButton, 0, 1);
+
+        Label hashout = new Label("Hash: ");
+        inputGridPane.add(hashout, 0, 3);
+        inputGridPane.add(hashText, 1, 3);
 
         // select BPM
         Label bpm = new Label("BPM: ");
@@ -84,11 +108,8 @@ public final class Bootstrap extends Application {
         		250
         );
         inputGridPane.add(beatSpeed, 1, 2);
-
-        // hash string
-        Label hashout = new Label("Hash: ");
-        inputGridPane.add(hashout, 0, 3);
-        inputGridPane.add(hashText, 1, 3);
+        
+        inputGridPane.add( playButton, 1, 4 );
 
         GridPane.setConstraints(openButton, 1, 1);
         inputGridPane.setAlignment(Pos.CENTER);

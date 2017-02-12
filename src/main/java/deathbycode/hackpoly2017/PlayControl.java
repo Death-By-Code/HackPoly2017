@@ -23,7 +23,10 @@ public class PlayControl {
         return MILLISECOND_PER_MINUTE / bpm;
     }
 
-    public void playQuarterNote(byte... noteIndex) {
+    public void playQuarterNote(int... noteIndex) {
+        for(int i = 0; i < noteIndex.length; i++){
+            System.out.println(noteIndex[i]);
+        }
         player.playNotes(this.getBeatInMillisecond(), noteIndex);
     }
 
@@ -58,23 +61,23 @@ public class PlayControl {
     @param startingMidiIndex: The starting note of the scale
     @return: A 15 note major scale
      */
-    public static byte[] generateMinorScale(byte startingMidiIndex) {
-        byte scaleDegrees[] = new byte[15];
+    public static int[] generateMinorScale(int startingMidiIndex) {
+        int scaleDegrees[] = new int[15];
         scaleDegrees[0] = startingMidiIndex;
-        scaleDegrees[1] = (byte) (startingMidiIndex + 2);
-        scaleDegrees[2] = (byte) (startingMidiIndex + 3);
-        scaleDegrees[3] = (byte) (startingMidiIndex + 5);
-        scaleDegrees[4] = (byte) (startingMidiIndex + 7);
-        scaleDegrees[5] = (byte) (startingMidiIndex + 8);
-        scaleDegrees[6] = (byte) (startingMidiIndex + 10);
-        scaleDegrees[7] = (byte) (startingMidiIndex + 12); // octave
-        scaleDegrees[8] = (byte) (startingMidiIndex + 14);
-        scaleDegrees[9] = (byte) (startingMidiIndex + 15);
-        scaleDegrees[10] = (byte) (startingMidiIndex + 17);
-        scaleDegrees[11] = (byte) (startingMidiIndex + 19);
-        scaleDegrees[12] = (byte) (startingMidiIndex + 20);
-        scaleDegrees[13] = (byte) (startingMidiIndex + 22);
-        scaleDegrees[14] = (byte) (startingMidiIndex + 24);
+        scaleDegrees[1] = startingMidiIndex + 2;
+        scaleDegrees[2] = startingMidiIndex + 3;
+        scaleDegrees[3] = startingMidiIndex + 5;
+        scaleDegrees[4] = startingMidiIndex + 7;
+        scaleDegrees[5] = startingMidiIndex + 8;
+        scaleDegrees[6] = startingMidiIndex + 10;
+        scaleDegrees[7] = startingMidiIndex + 12; // octave
+        scaleDegrees[8] = startingMidiIndex + 14;
+        scaleDegrees[9] = startingMidiIndex + 15;
+        scaleDegrees[10] = startingMidiIndex + 17;
+        scaleDegrees[11] = startingMidiIndex + 19;
+        scaleDegrees[12] = startingMidiIndex + 20;
+        scaleDegrees[13] = startingMidiIndex + 22;
+        scaleDegrees[14] = startingMidiIndex + 24;
 
         return scaleDegrees;
     }

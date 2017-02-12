@@ -74,7 +74,18 @@ public final class Bootstrap extends Application {
                        SHA256Hash mash = new SHA256Hash(file.getPath());
                     	try {
 							fileHex.setValue(mash.hashFileHex());
-							toneSynth.playNotes(300 - (int)beatSpeed.getValue(), hash.hashFile());
+                            char[] hexString = hash.hashFileHex().toCharArray();
+                            int[] hashAsciiValues = new int[hexString.length];
+                            for(int i = 0; i < hexString.length; i++) {
+                                hashAsciiValues[i] = (int)hexString[i];
+                            }
+                            for(int i = 0; i < hashAsciiValues.length; i++){
+                                System.out.println(hashAsciiValues[i]);
+                            }
+                            PlayControl playControl = new PlayControl((int)beatSpeed.getValue(), toneSynth);
+                            playControl.playQuarterNote(hashAsciiValues);
+
+//							toneSynth.playNotes(300 - (int)beatSpeed.getValue(), String.getBytes(hash.hashFileHex()));
 						} catch (Exception e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();

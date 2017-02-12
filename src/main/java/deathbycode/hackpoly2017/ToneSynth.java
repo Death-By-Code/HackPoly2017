@@ -24,9 +24,7 @@ public class ToneSynth {
             syn.open();
             midichannel = syn.getChannels();
 
-            for(int i = 0; i < syn.getAvailableInstruments().length; i++){
-                System.out.println(Integer.toString(i) + ": " + syn.getAvailableInstruments()[i].getName());
-            }
+
 
 
         } catch (MidiUnavailableException e) {
@@ -40,16 +38,26 @@ public class ToneSynth {
     @param notes: Piano keys in the range 0 - 127 with 60 as middle C
     @param length: The duration in milliseconds that the notes will play
      */
-    public void playNotes(int len, byte... notes) {
-        byte[] minor = PlayControl.generateMinorScale(notes[0]);
+    public void playNotes(int len, int... notes) {
+        int[] scale;
+        if(notes[notes.length - 1] % 2 == 0) {
+            scale = PlayControl.generateMinorScale(notes[0]);
+        }
+        else {
+            scale = PlayControl.generateMajorScale(notes[0]);
+        }
+//        for(int i = 0; i< minor.length; i++) {
+//            System.out.println(minor[i]);
+//        }
         AtomicInteger i = new AtomicInteger(0);
         scheduler.repeat(task -> {
             int j = i.getAndIncrement();
             if (j >= notes.length) {
                 task.stop();
             } else {
-                this.midichannel[2].noteOn(minor[Math.abs(notes[j]) % 15], 100);
-                scheduler.run(() -> this.midichannel[2].noteOff(minor[Math.abs(notes[j]) % 15]), len, TimeUnit.MILLISECONDS);
+                this.midichannel[2].noteOn(scale[notes[j] % 15], 100);
+                System.out.println(notes[j] % 15);
+                scheduler.run(() -> this.midichannel[2].noteOff(scale[Math.abs(notes[j]) % 15]), len, TimeUnit.MILLISECONDS);
             }
         }, len, TimeUnit.MILLISECONDS);
     }

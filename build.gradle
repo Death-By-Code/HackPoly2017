@@ -4,7 +4,7 @@ plugins {
     id 'com.github.johnrengelman.shadow' version '1.2.4'
 }
 
-defaultTasks 'clean', 'build'
+defaultTasks 'clean', 'build', 'harmonibites'
 
 version '1.0.0-SNAPSHOT'
 group 'deathbycode.hackploy2017'
@@ -30,5 +30,4 @@ repositories {
 
 dependencies {
     compile 'com.github.year4000.utilities:core:master-SNAPSHOT'
-    compile 'org.apache.httpcomponents:httpclient:4.5.3'
 }

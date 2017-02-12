@@ -31,3 +31,10 @@ repositories {
 dependencies {
     compile 'com.github.year4000.utilities:core:master-SNAPSHOT'
 }
+
+// Run the project
+task harmonibites(dependsOn: build) << {
+    exec {
+        commandLine "java -jar build/libs/${rootProject.name}-${version}-all.jar".split(" ")
+    }
+}

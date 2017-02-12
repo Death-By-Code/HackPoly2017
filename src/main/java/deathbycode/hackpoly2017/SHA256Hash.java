@@ -1,7 +1,6 @@
-import java.util.Arrays;
+package deathbycode.hackpoly2017;
+
 import java.io.*;
-import java.nio.file.*;
-import java.nio.file.Paths;
 import java.security.MessageDigest;
 import javax.xml.bind.DatatypeConverter;
 

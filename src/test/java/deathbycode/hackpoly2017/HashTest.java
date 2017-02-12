@@ -1,10 +1,6 @@
-import java.io.*;
-import java.nio.*;
+package deathbycode.hackpoly2017;
+
 import java.util.Arrays;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.security.MessageDigest;
-import javax.xml.bind.DatatypeConverter;
 
 public class HashTest 
 {

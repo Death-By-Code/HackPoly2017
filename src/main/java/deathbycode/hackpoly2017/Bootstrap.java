@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import com.guigarage.flatterfx.FlatterFX;
 import javafx.application.Application;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -15,10 +16,8 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -112,8 +111,8 @@ public final class Bootstrap extends Application {
         final GridPane inputGridPane = new GridPane();
         inputGridPane.setPrefSize(500, 300);
 
-        Text scenetitle = new Text("Choose a file to play sound for");
-        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
+        Label scenetitle = new Label("Choose a file to play sound for");
+        scenetitle.setFont(new Font(40));
         inputGridPane.add(scenetitle, 0, 0, 2, 1);
 
         // file selection
@@ -125,9 +124,15 @@ public final class Bootstrap extends Application {
         inputGridPane.add(fileTitle, 0, 2);
         inputGridPane.add(fileName, 1, 2);
 
+        // hash output
+        Label hashout = new Label("Hash: ");
+        inputGridPane.add(hashout, 0, 3);
+        inputGridPane.add(hashText, 1, 3);
+
+
         // BPM slider
         Label bpm = new Label("BPM: ");
-        inputGridPane.add(bpm, 0, 3);
+        inputGridPane.add(bpm, 0, 4);
         beatSpeed.setMin(150);
         beatSpeed.setMax(250);
         beatSpeed.setValue(200);
@@ -136,22 +141,25 @@ public final class Bootstrap extends Application {
         beatSpeed.setMajorTickUnit(50);
         beatSpeed.setMinorTickCount(5);
         beatSpeed.setBlockIncrement(10);
-        inputGridPane.setConstraints(beatSpeed, 1, 3);
+        inputGridPane.setConstraints(beatSpeed, 1, 4);
         inputGridPane.getChildren().add(beatSpeed);
 
-        // hash output
-        Label hashout = new Label("Hash: ");
-        inputGridPane.add(hashout, 0, 4);
-        inputGridPane.add(hashText, 1, 4);
-
-        // play button
-        inputGridPane.add( playButton, 1, 5 );
-
-        // stop button
-        inputGridPane.add( stopButton, 1, 6 );
+        // play stop buttons
+        GridPane buttonsPane = new GridPane();
+        buttonsPane.add( playButton, 1, 0 );
+        buttonsPane.add( stopButton, 3, 0 );
+        GridPane.setMargin(playButton, new Insets(5, 5, 5, 5));
+        GridPane.setMargin(stopButton, new Insets(5, 5, 5, 5));
+        inputGridPane.add(buttonsPane, 1, 5);
 
         GridPane.setConstraints(openButton, 1, 1);
-        inputGridPane.setAlignment(Pos.CENTER_LEFT);
+        playButton.setMinHeight(65);
+        stopButton.setMinHeight(65);
+        openButton.setMinHeight(65);
+        playButton.setMinWidth(150);
+        stopButton.setMinWidth(150);
+        openButton.setMinWidth(150);
+        inputGridPane.setAlignment(Pos.BASELINE_CENTER);
         inputGridPane.setHgap(5);
         inputGridPane.setVgap(20);
         inputGridPane.getChildren().addAll(openButton);
@@ -160,8 +168,13 @@ public final class Bootstrap extends Application {
         rootGroup.getChildren().addAll(inputGridPane);
         rootGroup.setPadding(new Insets(20, 20, 20, 20));
 
-        stage.setScene(new Scene(rootGroup));
+        Scene scene = new Scene(rootGroup);
+        stage.setScene(scene);
+        stage.setHeight(480);
+        stage.setWidth(720);
+        stage.setResizable(false);
         stage.show();
+        FlatterFX.style();
     }
 
     private void openFile(File file) {

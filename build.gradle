@@ -32,6 +32,7 @@ dependencies {
     compile 'com.github.year4000.utilities:core:master-SNAPSHOT'
     compile 'com.github.year4000.utilities:core-scheduler:master-SNAPSHOT'
     compile 'org.apache.httpcomponents:httpclient:4.5.3'
+    compile 'com.guigarage:flatter:0.7'
 }
 
 // Run the project

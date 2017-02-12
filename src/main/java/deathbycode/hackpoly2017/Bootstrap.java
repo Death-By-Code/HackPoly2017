@@ -25,6 +25,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -60,9 +61,7 @@ public final class Bootstrap extends Application {
                     	try {
 							fileHex.setValue(hash.hashFileHex());
 							filestr.setValue(file.getName());
-							//toneSynth.playNotes(300 - (int)beatSpeed.getValue(), hash.hashFile());
 						} catch (Exception e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
                     	hashText.textProperty().bind(fileHex);
@@ -91,9 +90,7 @@ public final class Bootstrap extends Application {
                             playControl = new PlayControl((int)beatSpeed.getValue(), toneSynth);
                             playControl.playQuarterNote(hashAsciiValues);
 
-//							toneSynth.playNotes(300 - (int)beatSpeed.getValue(), String.getBytes(hash.hashFileHex()));
 						} catch (Exception e1) {
-							// TODO Auto-generated catch block
 							e1.printStackTrace();
 						}
                     	//hashText.textProperty().bind(fileHex);
@@ -113,8 +110,8 @@ public final class Bootstrap extends Application {
         inputGridPane.setPrefSize(500, 300);
 
         Text scenetitle = new Text("Choose a file to play sound for");
-        scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-        inputGridPane.add(scenetitle, 0, 0, 2, 1);
+        scenetitle.setFont(Font.font("Arial Black", FontWeight.NORMAL, 20));
+        inputGridPane.add(scenetitle, 1, 0, 1, 1);
 
         // file selection
         Label fileButton = new Label("Select file: ");
@@ -151,7 +148,6 @@ public final class Bootstrap extends Application {
         inputGridPane.add( stopButton, 1, 6 );
 
         GridPane.setConstraints(openButton, 1, 1);
-        inputGridPane.setAlignment(Pos.CENTER_LEFT);
         inputGridPane.setHgap(5);
         inputGridPane.setVgap(20);
         inputGridPane.getChildren().addAll(openButton);

@@ -15,7 +15,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.GridPane;
@@ -69,6 +68,7 @@ public final class Bootstrap extends Application {
 						}
 						fileName.textProperty().bind(filestr);
                     	hashText.textProperty().bind(fileHex);
+                    	fileName.textProperty().bind(filestr);
                     }
                 }
             });
@@ -122,9 +122,8 @@ public final class Bootstrap extends Application {
         Label fileButton = new Label("Select file: ");
         inputGridPane.add(fileButton, 0, 1);
 
-        // File name
-        Label name = new Label("File name: ");
-        inputGridPane.add(name, 0, 2);
+        // file name
+        Label fileTitle = new Label("File name: ");
         inputGridPane.add(fileName, 1, 2);
 
         // BPM slider
@@ -144,27 +143,23 @@ public final class Bootstrap extends Application {
         // hash output
         Label hashout = new Label("Hash: ");
         inputGridPane.add(hashout, 0, 4);
-        inputGridPane.add(hashText, 1, 4);
-
-        inputGridPane.add( playButton, 1, 5 );
-        inputGridPane.add(hashout, 0, 3);
-        inputGridPane.add(hashText, 1, 3);
+        inputGridPane.add(hashText, 1, 5);
 
         // play button
-        inputGridPane.add( playButton, 1, 4 );
+        inputGridPane.add( playButton, 1, 6 );
 
         // stop button
-        inputGridPane.add( stopButton, 1, 5 );
+        inputGridPane.add( stopButton, 1, 7 );
 
         GridPane.setConstraints(openButton, 1, 1);
-        inputGridPane.setAlignment(Pos.CENTER);
+        inputGridPane.setAlignment(Pos.CENTER_LEFT);
         inputGridPane.setHgap(100);
         inputGridPane.setVgap(20);
         inputGridPane.getChildren().addAll(openButton);
 
         final Pane rootGroup = new VBox(12);
         rootGroup.getChildren().addAll(inputGridPane);
-        rootGroup.setPadding(new Insets(25, 25, 25, 25));
+        rootGroup.setPadding(new Insets(20, 20, 20, 20));
 
         stage.setScene(new Scene(rootGroup));
         stage.show();

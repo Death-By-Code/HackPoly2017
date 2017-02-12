@@ -1,13 +1,25 @@
 plugins {
     id 'java'
     id 'idea'
+    id 'com.github.johnrengelman.shadow' version '1.2.4'
 }
 
-defaultTasks 'assemble'
+defaultTasks 'clean', 'build'
+
+version '1.0.0-SNAPSHOT'
+group 'deathbycode.hackploy2017'
 
 jar {
+    baseName = rootProject.name
+
     manifest {
-        attributes 'Main-Class': 'deathbycode.hackpoly2017.Bootstrap'
+        attributes 'Main-Class': 'main.java.hackpoly2017.Bootstrap'
+    }
+}
+
+build.dependsOn shadowJar {
+    dependencies {
+        exclude 'META-INF/*'
     }
 }
 
